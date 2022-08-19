@@ -35,9 +35,20 @@ export const TodoList = () => {
   };
 
   // タスク削除
-  const handleRemoveTask = index => {
-    const newTodos = [...todos]
-    newTodos.splice(index, 1)
+  // const handleRemoveTask = index => {
+  //   const newTodos = [...todos]
+  //   newTodos.splice(index, 1)
+  //   setTodos(newTodos)
+  // }
+
+  // タスク更新
+  const handleUpdateTask = index => {
+    const newTodos = todos.map((todo, todoIndex) => {
+      if(todoIndex === index) {
+         todo.isCompleted = !todo.isCompleted
+      }
+      return todo
+    })
     setTodos(newTodos)
   }
 
@@ -55,7 +66,12 @@ export const TodoList = () => {
       </form>
       <ul>
         {todos.map((todo, index) => (
-          <li key={index}> {todo.task} <span  onClick={() => handleRemoveTask(index)}>X</span> </li>
+          <li
+            key={index}
+            style={ todo.isCompleted === true ? {textDecorationLine: 'line-through'} : {} }
+          >
+            {todo.task}
+            <span  onClick={() => handleUpdateTask(index)}>X</span> </li>
         ))}
       </ul>
     </div>
