@@ -35,11 +35,16 @@ export const TodoList = () => {
   };
 
   // タスク削除
-  // const handleRemoveTask = index => {
-  //   const newTodos = [...todos]
-  //   newTodos.splice(index, 1)
-  //   setTodos(newTodos)
-  // }
+  const handleRemoveTask = index => {
+    const taskName  = todos[index].task
+    if(window.confirm(`タスク「${taskName}」を削除しますか?`)) {
+      const newTodos = [...todos]
+      newTodos.splice(index, 1)
+      setTodos(newTodos)
+    } else {
+      return
+    }
+  }
 
   // タスク更新
   const handleUpdateTask = index => {
@@ -70,8 +75,13 @@ export const TodoList = () => {
             key={index}
             style={ todo.isCompleted === true ? {textDecorationLine: 'line-through'} : {} }
           >
+            <input
+              type="checkbox"
+              checked={todo.isCompleted}
+              onChange={() => handleUpdateTask(index)}
+            />
             {todo.task}
-            <span  onClick={() => handleUpdateTask(index)}>X</span> </li>
+            <span  onClick={() => handleRemoveTask(index)}>X</span> </li>
         ))}
       </ul>
     </div>
