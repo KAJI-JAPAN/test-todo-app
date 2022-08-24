@@ -22,7 +22,7 @@ export const AddTodo = ({ setTodos }) => {
     <form onSubmit={handleSubmit}>
       Add Task :
       <input placeholder="Add New Task" value={task} onChange={hundleNewTask} />
-      <button type="submit">Add</button>
+      <button type="submit">追加</button>
     </form>
   );
 };
