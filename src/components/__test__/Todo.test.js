@@ -40,5 +40,22 @@ describe("Todo", () => {
 
     expect(listElement).toHaveStyle('text-decoration-line: line-through;');
   })
+
+  it('should delete task when i click delete X', () => {
+    render(<Todo />)
+    
+    const inputElement = screen.getByPlaceholderText(/add new task/i)
+    const buttonElement = screen.getByRole('button', { name: "追加" })
+    
+    userEvent.type(inputElement, 'Learn Testing Libary')
+    userEvent.click(buttonElement)
+    expect(screen.getAllByRole('listitem')).toHaveLength(4)
+    
+    const listElement = screen.getByText(/Learn Testing Libary/i)
+    // eslint-disable-next-line testing-library/no-node-access
+    userEvent.click(listElement.querySelector('span'))
+     
+    expect(screen.getAllByRole('listitem')).toHaveLength(3)
+  })
   
 });

@@ -2,14 +2,14 @@
 export const TodoList = ({ todos, setTodos }) => {
   // タスク削除
   const handleRemoveTask = index => {
-    const taskName  = todos[index].task
-    if(window.confirm(`タスク「${taskName}」を削除しますか?`)) {
+    // const taskName  = todos[index].task
+    // if(window.confirm(`タスク「${taskName}」を削除しますか?`)) {
       const newTodos = [...todos]
       newTodos.splice(index, 1)
       setTodos(newTodos)
-    } else {
-      return
-    }
+    // } else {
+    //   return
+    // }
   }
 
   // タスク更新
@@ -36,7 +36,8 @@ export const TodoList = ({ todos, setTodos }) => {
               onChange={() => handleUpdateTask(index)}
             />
             {todo.task}
-            <span  onClick={() => handleRemoveTask(index)}>X</span> </li>
+            <span  onClick={() => handleRemoveTask(index)}>X</span>
+          </li>
         ))}
       </ul>
   );
