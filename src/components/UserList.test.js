@@ -1,5 +1,7 @@
 import { render, screen } from "@testing-library/react"
 import { UserList } from "./UserList"
+import axios from "axios"
+jest.mock('axios')
 
 describe('UserList', () => {
   it('render UserList', () => {
@@ -9,6 +11,7 @@ describe('UserList', () => {
   })
 
   it('should render user list', async () => {
+    axios.get.mockResolvedValue({ data: [{ name: 'John Doe', id: 1 }] });
     render(<UserList />)
     const listElements = await screen.findAllByRole('listitem')
     expect(listElements[0]).toBeInTheDocument()
